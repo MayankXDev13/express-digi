@@ -13,6 +13,11 @@ app.get('/ice-tea', (req, res) => {
     res.send('what ice tea would you prefer?')
 })
 
+
+app.get('/twitter', (req, res) => {
+    res.send('MayankxDev.com')
+})
+
 app.listen(port, () => {
   console.log(`Server is listeng at http://${hostname}:${port}`);
 });
