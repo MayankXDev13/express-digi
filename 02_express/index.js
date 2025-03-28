@@ -20,7 +20,9 @@ app.post("/teas", (req, res) => {
   res.status(201).send(newTea);
 });
 
-
+app.get("/teas", (req, res) => {
+  res.statusCode(200).send(teaData);
+});
 
 app.listen(port, () => {
   console.log(`Server is listeng at http://${hostname}:${port}`);
