@@ -9,6 +9,10 @@ app.get('/', (req, res) => {
     res.send('Hello from Mayank and his tea!')
 })
 
+app.get('/ice-tea', (req, res) => {
+    res.send('what ice tea would you prefer?')
+})
+
 app.listen(port, () => {
   console.log(`Server is listeng at http://${hostname}:${port}`);
 });
