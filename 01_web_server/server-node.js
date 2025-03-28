@@ -1,16 +1,24 @@
-const http = require('http')
+const http = require("http");
 
-const hostname = '127.0.0.1'
-const port = 3000
-
+const hostname = "127.0.0.1";
+const port = 3000;
 
 const server = http.createServer((req, res) => {
-    res.statusCode = 200
-    res.setHeader('Content-Type', 'text/plain')
-    res.end('Hello ice tea')
-})
-
+  if (req.url === "/") {
+    res.statusCode = 200;
+    res.setHeader("Content-Type", "text/plain");
+    res.end("Hello ice tea");
+  } else if (req.url === "/ice-tea") {
+    res.statusCode = 200;
+    res.setHeader("Content-Type", "text/plain");
+    res.end("Thanks for ordering ice tea, it tea, its really hot");
+  } else {
+    res.statusCode = 400;
+    res.setHeader("Content-Type", "text/plain");
+    res.end("404 Not found");
+  }
+});
 
 server.listen(port, hostname, () => {
-    console.log(`Server is listeng at http://${hostname}:${port}`);    
-})
+  console.log(`Server is listeng at http://${hostname}:${port}`);
+});
