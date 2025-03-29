@@ -2,6 +2,21 @@ import express from "express";
 
 const app = express();
 const port = 3000;
+
+/*
+app.get("/", (req, res) => {
+  res.send("Hello from Hitesh and his tea!");
+});
+
+app.get("/ice-tea", (req, res) => {
+  res.send("What ice tea would you prefer?");
+});
+
+app.get("/twitter", (req, res) => {
+  res.send("hiteshdotcom");
+});
+*/
+
 const hostname = "127.0.0.1";
 app.use(express.json());
 
@@ -57,7 +72,7 @@ app.delete("teas/:id", (req, res) => {
     return res.status(404).send("tea not found");
   }
   teaData.splice(index, 1);
-  return res.status(204).send("deleted");
+  res.status(204).send("Deleted");
 });
 
 app.listen(port, () => {
