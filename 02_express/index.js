@@ -1,6 +1,6 @@
 import express from "express";
 import "dotenv/config";
-import logger from "./logger";
+import logger from "./logger.js";
 import morgan from "morgan";
 
 const app = express();
@@ -86,14 +86,18 @@ app.put("/teas/:id", (req, res) => {
 
 // delete tea
 
-app.delete("teas/:id", (req, res) => {
-  const index = teaData.findIndex((t) => t.id === parseInt(req.params.id));
+app.delete("/teas/:id", (req, res) => {
+  const id = parseInt(req.params.id);
+  const index = teaData.findIndex((t) => t.id === id);
 
   if (index === -1) {
-    return res.status(404).send("tea not found");
+    console.log("Tea not found");
+    return res.status(404).json({ message: "Tea not found" });
   }
+
   teaData.splice(index, 1);
-  res.status(204).send("Deleted");
+
+  res.status(204).end(); // No content should be sent with 204
 });
 
 app.listen(port, () => {
