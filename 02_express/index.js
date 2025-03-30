@@ -1,9 +1,12 @@
 import express from "express";
-import 'dotenv/config'
+import "dotenv/config";
+import logger from "./logger";
+import morgan from "morgan";
 
 const app = express();
-const port =   process.env.PORT || 3000;
+const port = process.env.PORT || 3000;
 
+const morganFormat = ":method :url :status :response-time ms";
 
 /*
 app.get("/", (req, res) => {
@@ -18,6 +21,22 @@ app.get("/twitter", (req, res) => {
   res.send("hiteshdotcom");
 });
 */
+
+app.use(
+  morgan(morganFormat, {
+    stream: {
+      write: (message) => {
+        const logObject = {
+          method: message.split(" ")[0],
+          url: message.split(" ")[1],
+          status: message.split(" ")[2],
+          responseTime: message.split(" ")[3],
+        };
+        logger.info(JSON.stringify(logObject));
+      },
+    },
+  })
+);
 
 const hostname = "127.0.0.1";
 app.use(express.json());
